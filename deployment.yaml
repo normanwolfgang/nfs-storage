@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nfs-client-provisioner
   # replace with namespace where provisioner is deployed
-  namespace: default
+  namespace: nfs
 spec:
   replicas: 1
   strategy:
@@ -27,13 +27,13 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: k8s-sigs.io/nfs-subdir-external-provisioner
+              value: nfs-storage
             - name: NFS_SERVER
-              value: 10.3.243.101
+              value: 10.64.167.112
             - name: NFS_PATH
-              value: /ifs/kubernetes
+              value: /shares/nfs-sc
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 10.3.243.101
-            path: /ifs/kubernetes
+            server: 10.64.167.112
+            path: /shares/nfs-sc
